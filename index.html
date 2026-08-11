@@ -1,10 +1,113 @@
-!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="hi">
 <head>
-  <title>Video Share App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Video Share App</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 18px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .upload-box {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 2px 10px #ccc;
+      margin-bottom: 20px;
+    }
+
+    input {
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    video {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 12px;
+      background: black;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>My Video Share App</h1>
-  <p>Welcome to my video sharing app!</p>
+
+  <header>
+    <h1>🎬 My Video Share</h1>
+  </header>
+
+  <div class="container">
+
+    <div class="upload-box">
+      <h2>अपना वीडियो चुनें</h2>
+
+      <input
+        type="file"
+        id="videoInput"
+        accept="video/*"
+      >
+
+      <div class="message" id="message">
+        कोई वीडियो चुना नहीं गया
+      </div>
+
+      <video id="videoPlayer" controls hidden></video>
+    </div>
+
+  </div>
+
+  <script>
+    const videoInput = document.getElementById("videoInput");
+    const videoPlayer = document.getElementById("videoPlayer");
+    const message = document.getElementById("message");
+
+    videoInput.addEventListener("change", function () {
+
+      const file = this.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      const videoURL = URL.createObjectURL(file);
+
+      videoPlayer.src = videoURL;
+      videoPlayer.hidden = false;
+
+      message.textContent = "✅ वीडियो तैयार है — Play दबाकर देखें।";
+    });
+  </script>
+
 </body>
 </html>
